@@ -6,14 +6,15 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ============== MIDDLEWARES
-const allowedOrigins = [`http://localhost:${PORT}`];
+const allowedOrigins = [`http://localhost:${PORT}`, 'https://hng-12-stage0-r0ih.onrender.com/'];
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'Go baack!!!!! Origin not allowed by CORS';
-            return callback(new Error(msg), false);
+            return callback(null, true);
         }
-        return callback(null, true);
+        const msg = 'Go baack!!!!! Origin not allowed by CORS';
+        return callback(new Error(msg), false);
+        
     }
 }));
 
